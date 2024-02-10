@@ -15,35 +15,68 @@ from django.contrib.messages import constants
 from decouple import config
 import dj_database_url
 
+
+# ----------------------------------------------------------
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
+# ----------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k=h!ldzy7lz6yu98sa=y2bs)kql9tm+es1j_7bh%b+9rp0-zjo'
+SECRET_KEY = config('SECRET_KEY')
 
+
+# ----------------------------------------------------------
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 
+# ----------------------------------------------------------
+# Allowed Hosts
+# --- development --- #
+if DEBUG:
+    ALLOWED_HOSTS = []
+
+# --- Production --- #
+if not DEBUG:
+    ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
+
+
+# ----------------------------------------------------------
+# SSL and Cookies
+# ----- Production ----- #
+if not DEBUG:
+    # SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    CSRF_TRUSTED_ORIGINS = [config('TRUSTED_ORIGINS')]
+
+
+# ----------------------------------------------------------
 # Application definition
 
 INSTALLED_APPS = [
+    # --- Accounts --- #
+    'accounts',
+
+    # --- Django Apps --- #
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # --- system apps --- #
+    'base',
+    'principal',
 ]
 
+
+# ----------------------------------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,8 +85,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+# ----------------------------------------------------------
 ROOT_URLCONF = 'mymoney.urls'
 
+
+# ----------------------------------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,9 +107,12 @@ TEMPLATES = [
     },
 ]
 
+
+# ----------------------------------------------------------
 WSGI_APPLICATION = 'mymoney.wsgi.application'
 
 
+# ----------------------------------------------------------
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -85,6 +125,7 @@ DATABASES = {
 }
 
 
+# ----------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -104,24 +145,73 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# ----------------------------------------------------------
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Lisbon'
 
 USE_I18N = True
 
 USE_TZ = True
 
 
+# ----------------------------------------------------------
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# ----------------------------------------------------------
+# --- Email --- #
+
+# --- development --- #
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# --- Production --- #
+if not DEBUG:
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_PORT = config('EMAIL_PORT', cast=int)
+    EMAIL_USE_SSL = True
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+    ADMINS = [(config('SUPER_USER'), config('EMAIL'))]
+    MANAGERS = ADMINS
+
+
+# ----------------------------------------------------------
+# --- Custom User Model --- #
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+# ----------------------------------------------------------
+# --- Login Logout User --- #
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
+
+# ----------------------------------------------------------
+# Mensagens
+MESSAGE_TAGS = {
+    constants.ERROR: 'alert-danger',
+    constants.WARNING: 'alert-warning',
+    constants.DEBUG: 'alert-info',
+    constants.SUCCESS: 'alert-success',
+    constants.INFO: 'alert-info',
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
