@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'base/_base_head.html' %}
+</head>
+<body id="base-body">
+    <!-- Go to Top -->
+    <button class="gototop"></button>
+    <!-- Content -->
+    {% block body_content %}{% endblock %}
+    <!-- Footer -->
+    <footer>
+        {% include 'base/_base_footer.html' %}
+    </footer>
+    <!-- Scripts -->
+    {% include 'base/_base_script.html' %}
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!-- Footer -->
+<section id="footer">
+    <div class="container-flex-w70">
+        <div class="box-flex box-width-100">
+            <div class="h2-container">
+                <h2 class="h2-content">Get in touch</h2>
+            </div>
+        </div>
+        <div class="box-flex box-width-50 order1">
+            <div class="box-width-100">
+                <div class="footer-h3-flex h3-container">
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="h3-content">Address</h3>
+                </div>
+                <div class="p-container">
+                    <p>Oeiras, Lisbon, Portugal</p>
+{#                    <p>Canaã dos Carajás, Pará, Brazil</p>#}
+                </div>
+            </div>
+            <div class="box-width-100">
+                <div class="footer-h3-flex h3-container">
+                    <div>
+                        <i class="fas fa-envelope-square"></i>
+                    </div>
+                    <h3 class="h3-content">Email</h3>
+                </div>
+                <div class="p-container">
+                    <a href = "mailto: <antonio@antoniocalheirosneves.com>">antonio@antoniocalheirosneves.com</a>
+                </div>
+            </div>
+            <div class="box-width-100">
+                <div class="footer-h3-flex h3-container">
+                    <div>
+                        <i class="fas fa-phone-square-alt"></i>
+                    </div>
+                    <h3 class="h3-content">Phone</h3>
+                </div>
+                <div class="p-container">
+                    <p>+351 912951631</p>
+                </div>
+            </div>
+        </div>
+        <div class="box-flex box-width-50">
+            <div class="h3-container">
+                <h3 class="h3-content">Contact me</h3>
+            </div>
+            <div id="contact-message">
+            </div>
+            <!-- Contact Form -->
+            <form id="contact-form" method="post" action=""> <!-- onsubmit="alert('Olá do Form')" -->
+                {% csrf_token %}
+                <div class="form-box-flex">
+                    <input class="footer-input" type="text"
+                           name="contact_name" id="contact_name" maxlength="100"
+                           size="100" required="required" placeholder="Name">
+                </div>
+                <div class="form-box-flex">
+                    <input class="footer-input" type="email"
+                           name="contact_email" id="contact_email" maxlength="100"
+                           required="required"  placeholder="Email">
+                </div>
+                <div class="form-box-flex">
+                    <textarea class="footer-input" name="contact_message" id="contact_message" placeholder="Message" maxlength="1000" required="required"></textarea>
+                </div>
+                <div class="form-box-flex">
+                    <button class="contact-form-button" type="submit" name="contact_form_btn" onclick="hide_contact_form()">Send</button>
+                </div>
+            </form>
+            <div class="box-flex box-width-50">
+            <form action="?" method="POST">
+                {% csrf_token %}
+                <div class="form-box-flex">
+                    <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+                    <br/>
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+
+        </div>
+        </div>
+        
+    </div>
+    <!-- Copyright -->
+    <div id="copyright">
+        <p>
+            <i class="far fa-copyright"></i>
+            2021-2024 António Calheiros Neves
+        </p>
+        <a href="{% url 'index' %}">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="https://github.com/Antonio-Neves" target="_blank" rel="noreferrer noopener">
+            <i class="fab fa-github-square"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/antoniocalheirosneves/" target="_blank" rel="noreferrer noopener">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCrJ78GVGuJnyjDCikZEl1Ng" target="_blank" rel="noreferrer noopener">
+            <i class="fab fa-youtube-square"></i>
+        </a>
+        <a class="icon-last" href="{% url 'blog' %}" target="_blank" rel="noreferrer noopener">
+            <i class="fas fa-blog"></i>
+        </a>
+    </div>
+</section>
