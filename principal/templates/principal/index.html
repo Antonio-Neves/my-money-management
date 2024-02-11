@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Money</title>
-</head>
-<body>
-    <h1>Home Page</h1>
+{% extends 'base/_base_index.html' %}
+{% load static %}
+{% block title %}My Money{% endblock %}
+<!-- Body -->
+{% block body_content %}
+{#<body>#}
+    <h1>My Money Management</h1>
     <br>
 
     <a href="adminmymoney">Admin</a>
-</body>
-</html>
+{#</body>#}
+{% endblock %}
