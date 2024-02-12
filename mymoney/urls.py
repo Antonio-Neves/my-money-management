@@ -26,5 +26,5 @@ ADMIN_SITE = config('ADMIN_SITE')
 urlpatterns = [
 	path('accounts/', include('accounts.urls')),
 	path('', include('principal.urls')),
-	path('adminmymoney/', admin.site.urls),
+	path(f'{ADMIN_SITE}/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
