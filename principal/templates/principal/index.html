@@ -3,10 +3,27 @@
 {% block title %}My Money{% endblock %}
 <!-- Body -->
 {% block body_content %}
-{#<body>#}
-    <h1>My Money Management</h1>
+
+    <h1 style="color: #0D6EFD">My Money Management</h1>
     <br>
 
-    <a href="adminmymoney">Admin</a>
-{#</body>#}
+    <form class="py-2" action="adminmymoney">
+        <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Admin</button>
+    </form>
+    {% if user.is_authenticated %}
+        <form class="py-2" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-primary" type="submit" style="width: 100px">logout</button>
+        </form>
+    {% endif %}
+    {% if not user.is_authenticated %}
+        <form class="py-2" action="{% url 'login' %}">
+            <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Login</button>
+        </form>
+        <form class="py-2" method="post" action="{% url 'user-new' %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-primary" type="submit" style="width: 100px">New User</button>
+        </form>
+    {% endif %}
+
 {% endblock %}
