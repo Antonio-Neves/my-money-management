@@ -4,26 +4,48 @@
 <!-- Body -->
 {% block body_content %}
 
-    <h1 style="color: #0D6EFD">My Money Management</h1>
-    <br>
+    <h1 class="" style="color: #0D6EFD">My Money Management</h1>
+    <div class="container">
+        <div class="row row-cols-auto">
+            <div class="col ms-3">
+                <form class="" action="adminmymoney">
+                    <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Admin</button>
+                </form>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="col">
+                    <form class="" method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-primary" type="submit" style="width: 100px">logout</button>
+                    </form>
+            </div>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            <div class="col">
+                <form class="" action="{% url 'login' %}">
+                    <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Login</button>
+                </form>
+            </div>
+            <div class="col">
+                <form class="" method="post" action="{% url 'user-new' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-primary" type="submit" style="width: 100px">New User</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-cols-auto m-0 ms-1">
+            {% for month in months_list %}
+                <div class="col">
+                    <form class="" action="adminmymoney">
+                        <button class="btn btn-outline-primary"  type="submit" style="width: 100px">{{ month }}</button>
+                    </form>
+                </div>
+            {% endfor %}
 
-    <form class="py-2" action="adminmymoney">
-        <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Admin</button>
-    </form>
-    {% if user.is_authenticated %}
-        <form class="py-2" method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button class="btn btn-outline-primary" type="submit" style="width: 100px">logout</button>
-        </form>
-    {% endif %}
-    {% if not user.is_authenticated %}
-        <form class="py-2" action="{% url 'login' %}">
-            <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Login</button>
-        </form>
-        <form class="py-2" method="post" action="{% url 'user-new' %}">
-            {% csrf_token %}
-            <button class="btn btn-outline-primary" type="submit" style="width: 100px">New User</button>
-        </form>
-    {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
