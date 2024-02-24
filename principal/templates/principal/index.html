@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row row-cols-auto">
             <div class="col ms-3">
-                <form class="" action="adminmymoney">
+                <form class="" action={{ 'adminmymoney' }}>
                     <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Admin</button>
                 </form>
             </div>
@@ -39,7 +39,7 @@
         <div class="row row-cols-auto m-0 ms-1">
             {% for month in months_list %}
                 <div class="col">
-                    <form class="" action="adminmymoney">
+                    <form class="" action={{ 'adminmymoney' }}>
                         <button class="btn btn-outline-primary"  type="submit" style="width: 100px">{{ month }}</button>
                     </form>
                 </div>
