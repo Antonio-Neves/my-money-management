@@ -56,7 +56,7 @@ class Entrada(models.Model):
         ordering = ['entrada_data', 'entrada_id']
 
     def __str__(self):
-        return f'{self.metodo_transacao_nome}'
+        return f'{self.entrada_ds}'
 
     def get_absolute_url(self):
         return reverse("entrada", kwargs={"pk": self.pk})
