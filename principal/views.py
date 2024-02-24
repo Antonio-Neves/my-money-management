@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
+
 months_list = [
 	'Janeiro', 'Fevereiro', 'Março', 'abril',
 	'maio', 'junho', 'julho', 'agosto',
