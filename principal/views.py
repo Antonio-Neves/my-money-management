@@ -7,6 +7,7 @@ months_list = [
 	'setembro', 'outubro', 'novembro', 'dezembro'
 ]
 
+
 # --- Home Page --- #
 class IndexView(TemplateView):
 	template_name = 'principal/index.html'
