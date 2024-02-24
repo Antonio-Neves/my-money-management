@@ -21,6 +21,8 @@ media
 htmlcov/*
 
 # Files
+# drawio backup file
+.$*
 
 # Testes
 .coverage
