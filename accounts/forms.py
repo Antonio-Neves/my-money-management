@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import Group
 
 from accounts.models import CustomUser
-from settings import CUSTOM_USER_GROUP
+from mymoney.settings import CUSTOM_USER_GROUP
 
 
 class CustomUserCreateForm(UserCreationForm):
