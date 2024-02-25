@@ -170,5 +170,4 @@ class Saida(UserConnected):
 		return reverse("saida", kwargs={"pk": self.pk})
 
 
-def test():
-	pass
+
