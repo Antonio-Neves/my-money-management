@@ -1,0 +1,10 @@
+[
+  {
+    "model": "transactions.TipoTransacao",
+    "pk": 1,
+    "fields": {
+      "tipo_transacao_id": 1,
+      "tipo_transacao_nome": "Dinheiro"
+    }
+  }
+]
