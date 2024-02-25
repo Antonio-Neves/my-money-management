@@ -6,6 +6,14 @@
 
 {% block body_content %}
 
+    {% include 'base/_messages.html' %}
+
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
     <div class="container back01">
 
         <form method="post" class="form" action="{% url 'user-new' %}" autocomplete="off">
