@@ -92,7 +92,7 @@ class Entrada(UserConnected):
 	entrada_area = models.ForeignKey(
 		AreaTransacao, default='Vários',
 		related_name='entrada_areatransacao',
-        related_query_name='entrada_areatransacao',
+		related_query_name='entrada_areatransacao',
 		on_delete=models.SET_DEFAULT
 	)
 	entrada_ds = models.CharField(
@@ -101,7 +101,7 @@ class Entrada(UserConnected):
 	entrada_tipo = models.ForeignKey(
 		TipoTransacao, default='Fixa',
 		related_name='entrada_tipotransacao',
-        related_query_name='entrada_tipotransacao',
+		related_query_name='entrada_tipotransacao',
 		on_delete=models.SET_DEFAULT
 	)
 	entrada_valor = models.DecimalField(
@@ -110,7 +110,7 @@ class Entrada(UserConnected):
 	entrada_metodo_transacao = models.ForeignKey(
 		MetodoTransacao, default='Dinheiro',
 		related_name='entrada_metodotransacao',
-        related_query_name='entrada_metodotransacao',
+		related_query_name='entrada_metodotransacao',
 		on_delete=models.SET_DEFAULT
 	)
 
@@ -136,7 +136,7 @@ class Saida(UserConnected):
 	saida_area = models.ForeignKey(
 		AreaTransacao, default='Vários',
 		related_name='saida_areatransacao',
-        related_query_name='saida_areatransacao',
+		related_query_name='saida_areatransacao',
 		on_delete=models.SET_DEFAULT
 	)
 	saida_ds = models.CharField(
@@ -145,7 +145,7 @@ class Saida(UserConnected):
 	saida_tipo = models.ForeignKey(
 		TipoTransacao, default='Fixa',
 		related_name='saida_tipotransacao',
-        related_query_name='saida_tipotransacao',
+		related_query_name='saida_tipotransacao',
 		on_delete=models.SET_DEFAULT
 	)
 	saida_valor = models.DecimalField(
@@ -154,7 +154,7 @@ class Saida(UserConnected):
 	saida_metodo_transacao = models.ForeignKey(
 		MetodoTransacao, default='Dinheiro',
 		related_name='saida_metodotransacao',
-        related_query_name='saida_metodotransacao',
+		related_query_name='saida_metodotransacao',
 		on_delete=models.SET_DEFAULT
 	)
 
@@ -169,5 +169,6 @@ class Saida(UserConnected):
 	def get_absolute_url(self):
 		return reverse("saida", kwargs={"pk": self.pk})
 
-    def test():
-	    pass
+
+def test():
+	pass
