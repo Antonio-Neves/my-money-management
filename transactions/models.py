@@ -168,6 +168,3 @@ class Saida(UserConnected):
 
     def get_absolute_url(self):
         return reverse("saida", kwargs={"pk": self.pk})
-
-    def test(self):
-        pass
