@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.models import Group
 
 from accounts.models import CustomUser
+from settings import CUSTOM_USER_GROUP
 
 
 class CustomUserCreateForm(UserCreationForm):
@@ -17,6 +19,8 @@ class CustomUserCreateForm(UserCreationForm):
 
 		if commit:
 			user.save()
+			group = Group.objects.get(name=CUSTOM_USER_GROUP)
+			group.user_set.add(user)
 
 		return user
 
