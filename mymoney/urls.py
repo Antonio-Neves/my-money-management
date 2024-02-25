@@ -18,9 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from decouple import config
-
-ADMIN_SITE = config('ADMIN_SITE')
+from settings import ADMIN_SITE
 
 
 urlpatterns = [
