@@ -90,19 +90,19 @@ class Entrada(UserConnected):
         'Data', auto_now=False, auto_now_add=False
     )
     entrada_area = models.ForeignKey(
-        AreaTransacao, default='Vários',
+        AreaTransacao,
         related_name='entrada_areatransacao',
         related_query_name='entrada_areatransacao',
-        on_delete=models.SET_DEFAULT
+        on_delete=models.PROTECT
     )
     entrada_ds = models.CharField(
         'Descrição', max_length=100
     )
     entrada_tipo = models.ForeignKey(
-        TipoTransacao, default='Fixa',
+        TipoTransacao,
         related_name='entrada_tipotransacao',
         related_query_name='entrada_tipotransacao',
-        on_delete=models.SET_DEFAULT
+        on_delete=models.PROTECT
     )
     entrada_valor = models.DecimalField(
         'Valor', max_digits=7, decimal_places=2
@@ -111,8 +111,7 @@ class Entrada(UserConnected):
         MetodoTransacao,
         related_name='entrada_metodotransacao',
         related_query_name='entrada_metodotransacao',
-        # on_delete=models.SET_DEFAULT
-        on_delete=models.SET('Dinheiros')
+        on_delete=models.PROTECT
     )
 
     class Meta:
@@ -135,19 +134,19 @@ class Saida(UserConnected):
         'Data', auto_now=False, auto_now_add=False
     )
     saida_area = models.ForeignKey(
-        AreaTransacao, default='Vários',
+        AreaTransacao,
         related_name='saida_areatransacao',
         related_query_name='saida_areatransacao',
-        on_delete=models.SET_DEFAULT
+        on_delete=models.PROTECT
     )
     saida_ds = models.CharField(
         'Descrição', max_length=100
     )
     saida_tipo = models.ForeignKey(
-        TipoTransacao, default='Fixa',
+        TipoTransacao,
         related_name='saida_tipotransacao',
         related_query_name='saida_tipotransacao',
-        on_delete=models.SET_DEFAULT
+        on_delete=models.PROTECT
     )
     saida_valor = models.DecimalField(
         'Valor', max_digits=7, decimal_places=2
@@ -156,8 +155,7 @@ class Saida(UserConnected):
         MetodoTransacao,
         related_name='saida_metodotransacao',
         related_query_name='saida_metodotransacao',
-        # on_delete=models.SET_DEFAULT
-        on_delete=models.SET('Dinheiros')
+        on_delete=models.PROTECT
     )
 
     class Meta:
