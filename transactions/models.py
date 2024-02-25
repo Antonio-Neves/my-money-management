@@ -23,7 +23,7 @@ class MetodoTransacao(UserConnected):
         'ID - Método Transação', primary_key=True
     )
     metodo_transacao_nome = models.CharField(
-        'Método de Transação', max_length=100, unique=True
+        'Método de Transação', max_length=100
     )
     metodo_transacao_tipo = models.CharField(
         'Tipo de transação', max_length=1,
@@ -47,7 +47,7 @@ class AreaTransacao(UserConnected):
         'ID - Área Transação', primary_key=True
     )
     area_transacao_nome = models.CharField(
-        'Área de Transação', max_length=100, unique=True
+        'Área de Transação', max_length=100
     )
 
     class Meta:
@@ -67,7 +67,7 @@ class TipoTransacao(UserConnected):
         'ID - Tipo Transação', primary_key=True
     )
     tipo_transacao_nome = models.CharField(
-        'Tipo de Transação', max_length=100, unique=True
+        'Tipo de Transação', max_length=100
     )
 
     class Meta:
@@ -108,10 +108,11 @@ class Entrada(UserConnected):
         'Valor', max_digits=7, decimal_places=2
     )
     entrada_metodo_transacao = models.ForeignKey(
-        MetodoTransacao, default='Dinheiro',
+        MetodoTransacao,
         related_name='entrada_metodotransacao',
         related_query_name='entrada_metodotransacao',
-        on_delete=models.SET_DEFAULT
+        # on_delete=models.SET_DEFAULT
+        on_delete=models.SET('Dinheiros')
     )
 
     class Meta:
@@ -152,10 +153,11 @@ class Saida(UserConnected):
         'Valor', max_digits=7, decimal_places=2
     )
     saida_metodo_transacao = models.ForeignKey(
-        MetodoTransacao, default='Dinheiro',
+        MetodoTransacao,
         related_name='saida_metodotransacao',
         related_query_name='saida_metodotransacao',
-        on_delete=models.SET_DEFAULT
+        # on_delete=models.SET_DEFAULT
+        on_delete=models.SET('Dinheiros')
     )
 
     class Meta:
