@@ -11,14 +11,14 @@ class MetodoTransacaoAdmin(admin.ModelAdmin):
         'metodo_transacao_tipo'
     )
 
-    exclude = ['metodo_transacao_usuario']
+    exclude = ['user_connected']
 
     def get_queryset(self, request):
 
         qs = super().get_queryset(request)
-        return qs.filter(metodo_transacao_usuario=request.user)
+        return qs.filter(user_connected=request.user)
 
     def save_model(self, request, obj, form, change):
 
-        obj.metodo_transacao_usuario = request.user
+        obj.user_connected = request.user
         super().save_model(request, obj, form, change)
