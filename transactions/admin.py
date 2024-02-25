@@ -6,19 +6,19 @@ from transactions.models import MetodoTransacao, Entrada
 @admin.register(MetodoTransacao)
 class MetodoTransacaoAdmin(admin.ModelAdmin):
 
-	list_display = (
-		'metodo_transacao_nome',
-		'metodo_transacao_tipo'
-	)
+    list_display = (
+        'metodo_transacao_nome',
+        'metodo_transacao_tipo'
+    )
 
-	exclude = ['metodo_transacao_usuario']
+    exclude = ['metodo_transacao_usuario']
 
-	def get_queryset(self, request):
+    def get_queryset(self, request):
 
-		qs = super().get_queryset(request)
-		return qs.filter(metodo_transacao_usuario=request.user)
+        qs = super().get_queryset(request)
+        return qs.filter(metodo_transacao_usuario=request.user)
 
-	def save_model(self, request, obj, form, change):
+    def save_model(self, request, obj, form, change):
 
-		obj.metodo_transacao_usuario = request.user
-		super().save_model(request, obj, form, change)
+        obj.metodo_transacao_usuario = request.user
+        super().save_model(request, obj, form, change)
