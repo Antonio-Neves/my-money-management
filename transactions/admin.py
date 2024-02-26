@@ -1,26 +1,17 @@
 from django.contrib import admin
 
-from transactions.models import MetodoTransacao, AreaTransacao, Entrada
+from transactions.models import (
+    MetodoTransacao,
+    AreaTransacao,
+    TipoTransacao,
+    Entrada,
+    Saida,
+
+)
 
 
-@admin.register(MetodoTransacao)
-class MetodoTransacaoAdmin(admin.ModelAdmin):
-
-    exclude = ['user_connected']
-
-    def get_queryset(self, request):
-
-        qs = super().get_queryset(request)
-        return qs.filter(user_connected=request.user)
-
-    def save_model(self, request, obj, form, change):
-
-        obj.user_connected = request.user
-        super().save_model(request, obj, form, change)
-
-
-@admin.register(AreaTransacao)
-class AreaTransacaoAdmin(admin.ModelAdmin):
+@admin.register(MetodoTransacao, AreaTransacao, TipoTransacao)
+class FilterUserAdmin(admin.ModelAdmin):
 
     exclude = ['user_connected']
 
@@ -33,28 +24,49 @@ class AreaTransacaoAdmin(admin.ModelAdmin):
 
         obj.user_connected = request.user
         super().save_model(request, obj, form, change)
-
 
 
 @admin.register(Entrada)
-class EntradaAdmin(admin.ModelAdmin):
+class EntradaAdmin(FilterUserAdmin):
 
-    exclude = ['user_connected']
+    list_display = [
+        'entrada_data',
+        'entrada_area',
+        'entrada_ds',
+        'entrada_tipo',
+        'entrada_valor',
+        'entrada_metodo_transacao',
+    ]
 
-    def get_queryset(self, request):
-
-        qs = super().get_queryset(request)
-        print(qs)
-        return qs.filter(user_connected=request.user)
-
-    def save_model(self, request, obj, form, change):
-
-        obj.user_connected = request.user
-        super().save_model(request, obj, form, change)
+    list_filter = ['entrada_data', 'entrada_tipo']
 
     def render_change_form(self, request, context, *args, **kwargs):
 
-        context['adminform'].form.fields['entrada_metodo_transacao'].queryset = MetodoTransacao.objects.filter(user_connected=request.user)
         context['adminform'].form.fields['entrada_area'].queryset = AreaTransacao.objects.filter(user_connected=request.user)
+        context['adminform'].form.fields['entrada_tipo'].queryset = TipoTransacao.objects.filter(user_connected=request.user)
+        context['adminform'].form.fields['entrada_metodo_transacao'].queryset = MetodoTransacao.objects.filter(user_connected=request.user)
+
+        return super().render_change_form(request, context, args, kwargs)
+
+
+@admin.register(Saida)
+class SaidaAdmin(FilterUserAdmin):
+
+    list_display = [
+        'saida_data',
+        'saida_area',
+        'saida_ds',
+        'saida_tipo',
+        'saida_valor',
+        'saida_metodo_transacao',
+    ]
+
+    list_filter = ['saida_data', 'saida_tipo']
+
+    def render_change_form(self, request, context, *args, **kwargs):
+
+        context['adminform'].form.fields['saida_area'].queryset = AreaTransacao.objects.filter(user_connected=request.user)
+        context['adminform'].form.fields['saida_tipo'].queryset = TipoTransacao.objects.filter(user_connected=request.user)
+        context['adminform'].form.fields['saida_metodo_transacao'].queryset = MetodoTransacao.objects.filter(user_connected=request.user)
 
         return super().render_change_form(request, context, args, kwargs)
