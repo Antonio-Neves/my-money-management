@@ -10,8 +10,9 @@ __pycache__
 # Data Base
 db.sqlite3
 
-# PyCharm
+# IDEs
 .idea
+.vscode
 
 # Virtualenv
 .venv
