@@ -7,7 +7,7 @@
     <h1 class="" style="color: #0D6EFD">My Money Management</h1>
     <div class="container">
         <div class="row row-cols-auto">
-            <div class="col ms-3">
+            <div class="col">
                 <form class="" action={{ 'adminmymoney' }}>
                     <button class="btn btn-outline-primary"  type="submit" style="width: 100px">Admin</button>
                 </form>
@@ -36,15 +36,41 @@
         </div>
     </div>
     <div class="container">
-        <div class="row row-cols-auto m-0 ms-1">
+        <div class="row row-cols-auto">
             {% for month in months_list %}
                 <div class="col">
                     <form class="" action={{ 'adminmymoney' }}>
-                        <button class="btn btn-outline-primary"  type="submit" style="width: 100px">{{ month }}</button>
+                        <button class="btn btn-outline-primary" type="submit" style="width: 100px">{{ month }}</button>
                     </form>
                 </div>
             {% endfor %}
-
+        </div>
+        <div class="" id="">
+{#            <ul class="list-group">#}
+{% if user.is_authenticated %}
+            {% for saida in object_list %}
+{#                {{ saida.saida_data|date:"d/m/Y" }}#}
+{#                {{ saida.saida_ds }}#}
+{#            {% for saida in months_list.1 %}#}
+{#                {% include 'transactions/saida_card.html' %}#}
+{#                <li class="list-group-item">{{ saida.saida_data }} - {{ saida.saida_ds }}</li>#}
+{#                <div class="d-flex flex-row btn btn-outline-primary">#}
+{#                    <div class="p-2 w-10 text-start">{{ saida.saida_data }}</div>#}
+{#                    <div class="p-2 w-25 text-start">{{ saida.saida_ds }}</div>#}
+{#                    <div class="p-2 w-25 text-end">{{ saida.saida_valor }}</div>#}
+{#                    <div class="p-2 w-25 text-start">{{ saida.saida_tipo }}</div>#}
+{#                </div>#}
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item list_column_10 border border-primary text-start">{{ saida.saida_data|date:"d/m/Y" }}</li>
+                    <li class="list-group-item list_column_45 border border-primary text-start">{{ saida.saida_ds }}</li>
+                    <li class="list-group-item list_column_10 border border-primary text-end">{{ saida.saida_valor }} €</li>
+                    <li class="list-group-item list_column_10 border border-primary">{{ saida.saida_area }}</li>
+                    <li class="list-group-item list_column_15 border border-primary">{{ saida.saida_metodo_transacao }}</li>
+                    <li class="list-group-item list_column_10 border border-primary">{{ saida.saida_tipo }}</li>
+                </ul>
+            {% endfor %}
+{#            </ul>#}
+{% endif %}
         </div>
     </div>
 
