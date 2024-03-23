@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-
+from django.utils.html import format_html
 
 METODO_TRANSACAO_TIPO_CHOICES = {
     'E': 'Eletrônico',
@@ -168,3 +168,29 @@ class Saida(UserConnected):
 
     def get_absolute_url(self):
         return reverse("saida", kwargs={"pk": self.pk})
+
+    def colored_saida_ds(self):
+
+        if self.saida_tipo.__str__() == 'Extra':
+            return format_html(
+                f'<span style="color: #ff0000;">{self.saida_ds}</span>'
+            )
+        else:
+            return self.saida_tipo
+
+    colored_saida_ds.short_description = 'Descrição'
+    colored_saida_ds.allow_tags = True
+    colored_saida_ds.admin_order_field = 'saida_ds'
+
+    def colored_saida_tipo(self):
+
+        if self.saida_tipo.__str__() == 'Extra':
+            return format_html(
+                f'<span style="color: #ff0000;">{self.saida_tipo}</span>'
+            )
+        else:
+            return self.saida_tipo
+
+    colored_saida_tipo.short_description = "Saída Tipo"
+    colored_saida_tipo.allow_tags = True
+    colored_saida_tipo.admin_order_field = 'saida_tipo'
