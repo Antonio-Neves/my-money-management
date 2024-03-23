@@ -25,4 +25,5 @@ urlpatterns = [
 	path('', include('principal.urls')),
 	path('transactions/', include('transactions.urls')),
 	path(f'{ADMIN_SITE}/', admin.site.urls),
+	path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
