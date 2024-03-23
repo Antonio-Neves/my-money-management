@@ -55,11 +55,13 @@ class SaidaAdmin(FilterUserAdmin):
     list_display = [
         'saida_data',
         'saida_area',
-        'saida_ds',
-        'saida_tipo',
+        'colored_saida_ds',
+        'colored_saida_tipo',
         'saida_valor',
         'saida_metodo_transacao',
     ]
+
+    search_fields = ["saida_ds"]
 
     list_filter = ['saida_data', 'saida_tipo']
 
