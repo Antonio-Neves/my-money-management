@@ -28,23 +28,6 @@
     --line-height: 40px;
 }
 
-/*:root {*/
-/*    !*--navbar-height: 75px;*!*/
-/*    !*--navbar-bg-color: transparent;*!*/
-/*    !*--navbar-text-color: rgb(235,240,255);*!*/
-/*    !*--navbar-text-color-focus: rgb(10,210,250);*!*/
-/*    !*--navbar-bg-contrast: transparent;*!*/
-/*    --white-blue-color: rgb(235,240,255);*/
-/*    --white-perl-color: rgb(195,200,215);*/
-/*    --bright-blue-color: rgb(10,210,250);*/
-/*    --bright-green-color: rgb(10,250,210);*/
-/*    --yellow-color: #FBBA00;*/
-/*    --blue-dark-color: #003366;*/
-/*    --line-height: 40px;*/
-/*}*/
-
-
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -72,9 +55,17 @@
 h1, h2, h3, h4 {
     font-family: 'Rajdhani', sans-serif;
     font-weight: 300;
-    font-size: 6rem;
-    /*margin: 0;*/
     padding: 0.5%;
+    color: var(--blue-primary);
+}
+
+h1 {
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 3rem;
+    margin: 2% 0 0 0.5%;
 }
 
 a {
@@ -90,6 +81,14 @@ p {
     padding: 0.1%;
 }
 
+.btn-index {
+    width: 100px;
+}
+
+/*.btn-index:hover {*/
+/*    color: var(--white-perl-color);*/
+/*}*/
+
 /*****************************/
 /* Containers                */
 /*****************************/
@@ -99,6 +98,15 @@ p {
     padding: 0;
     width: 100%;
 }
+
+.row, .row-cols-auto {
+    width: 100%;
+}
+
+
+
+
+
 
 
 
@@ -119,55 +127,55 @@ p {
     }
 }
 
-@media (max-width: 1000px) {
+/*@media (max-width: 1000px) {*/
 
-    .container-flex-w70,
-    .container-flex-w80 {
-        width: 90%;
-        height: 90%;
-    }
+/*    .container-flex-w70,*/
+/*    .container-flex-w80 {*/
+/*        width: 90%;*/
+/*        height: 90%;*/
+/*    }*/
 
-    .box-width-25,
-    .box-width-33,
-    .box-width-40 {
-        width: 100%;
-        flex: 100%;
-   }
+/*    .box-width-25,*/
+/*    .box-width-33,*/
+/*    .box-width-40 {*/
+/*        width: 100%;*/
+/*        flex: 100%;*/
+/*   }*/
 
-    .box-padd-r-15 {
-        padding-right: 0;
-    }
-}
+/*    .box-padd-r-15 {*/
+/*        padding-right: 0;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 700px) {
+/*@media (max-width: 700px) {*/
 
-    .box-width-50 {
-        width: 100%
-    }
-}
+/*    .box-width-50 {*/
+/*        width: 100%*/
+/*    }*/
+/*}*/
 
 
-.list_column_5 {
+.list-column-5 {
     /*padding: 0.5%;*/
     width: 5%
 }
 
-.list_column_10 {
+.list-column-10 {
     padding: 0.5%;
     width: 10%
 }
 
-.list_column_15 {
+.list-column-15 {
     /*padding: 0.5%;*/
     width: 15%
 }
 
-.list_column_45 {
+.list-column-45 {
     /*padding: 0.5%;*/
     width: 45%
 }
 
-.list_column_50 {
+.list-column-50 {
     /*padding: 0.5%;*/
     width: 50%
 }
