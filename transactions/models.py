@@ -3,9 +3,10 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils.html import format_html
 
-METODO_TRANSACAO_TIPO_CHOICES = {
-    'E': 'Eletrônico',
-    'F': 'Físico'
+
+TRANSACAO_E_S_CHOICES = {
+    'E': 'Entrada',
+    'S': 'Saída'
 }
 
 
@@ -18,36 +19,12 @@ class UserConnected(models.Model):
         abstract = True
 
 
-class MetodoTransacao(UserConnected):
-    metodo_transacao_id = models.BigAutoField(
-        'ID - Método Transação', primary_key=True
-    )
-    metodo_transacao_nome = models.CharField(
-        'Método de Transação', max_length=100
-    )
-    metodo_transacao_tipo = models.CharField(
-        'Tipo de transação', max_length=1,
-        choices=METODO_TRANSACAO_TIPO_CHOICES
-    )
-
-    class Meta:
-        verbose_name = 'Método de transação'
-        verbose_name_plural = 'Métodos de transação'
-        ordering = ['metodo_transacao_nome']
-
-    def __str__(self):
-        return f'{self.metodo_transacao_nome}'
-
-    def get_absolute_url(self):
-        return reverse("metodo-transacao", kwargs={"pk": self.pk})
-
-
 class AreaTransacao(UserConnected):
     area_transacao_id = models.BigAutoField(
         'ID - Área Transação', primary_key=True
     )
     area_transacao_nome = models.CharField(
-        'Área de Transação', max_length=100
+        'Área de Transação', max_length=100, unique=True
     )
 
     class Meta:
@@ -67,7 +44,7 @@ class TipoTransacao(UserConnected):
         'ID - Tipo Transação', primary_key=True
     )
     tipo_transacao_nome = models.CharField(
-        'Tipo de Transação', max_length=100
+        'Tipo de Transação', max_length=100, unique=True
     )
 
     class Meta:
@@ -82,115 +59,110 @@ class TipoTransacao(UserConnected):
         return reverse("tipo-transacao", kwargs={"pk": self.pk})
 
 
-class Entrada(UserConnected):
-    entrada_id = models.BigAutoField(
+class MetodoTransacao(UserConnected):
+    metodo_transacao_id = models.BigAutoField(
+        'ID - Método Transação', primary_key=True
+    )
+    metodo_transacao_nome = models.CharField(
+        'Método de Transação', max_length=100, unique=True
+    )
+    metodo_transacao_saldo = models.DecimalField(
+        'Saldo',
+        max_digits=8,
+        decimal_places=2
+    )
+
+    class Meta:
+        verbose_name = 'Método de transação'
+        verbose_name_plural = 'Métodos de transação'
+        ordering = ['metodo_transacao_nome']
+
+    def __str__(self):
+        return f'{self.metodo_transacao_nome}'
+
+    def get_absolute_url(self):
+        return reverse("metodo-transacao", kwargs={"pk": self.pk})
+
+
+class Transacao(UserConnected):
+    transacao_id = models.BigAutoField(
         'ID - Entrada', primary_key=True
     )
-    entrada_data = models.DateField(
+    transacao_data = models.DateField(
         'Data', auto_now=False, auto_now_add=False
     )
-    entrada_area = models.ForeignKey(
+    transacao_area = models.ForeignKey(
         AreaTransacao,
-        related_name='entrada_areatransacao',
-        related_query_name='entrada_areatransacao',
+        related_name='transacao_areatransacao',
+        related_query_name='transacao_area_transacao',
         on_delete=models.PROTECT
     )
-    entrada_ds = models.CharField(
+    transacao_descricao = models.CharField(
         'Descrição', max_length=100
     )
-    entrada_tipo = models.ForeignKey(
-        TipoTransacao,
-        related_name='entrada_tipotransacao',
-        related_query_name='entrada_tipotransacao',
-        on_delete=models.PROTECT
+    transacao_valor = models.DecimalField(
+        'Valor', max_digits=8, decimal_places=2
     )
-    entrada_valor = models.DecimalField(
-        'Valor', max_digits=7, decimal_places=2
-    )
-    entrada_metodo_transacao = models.ForeignKey(
+    transacao_metodo = models.ForeignKey(
         MetodoTransacao,
-        related_name='entrada_metodotransacao',
-        related_query_name='entrada_metodotransacao',
+        related_name='transacao_metodotransacao',
+        related_query_name='transacao_metodo_transacao',
         on_delete=models.PROTECT
+    )
+    transacao_tipo = models.ForeignKey(
+        MetodoTransacao,
+        related_name='transacao_tipotransacao',
+        related_query_name='transacao_tipo_transacao',
+        on_delete=models.PROTECT
+    )
+    transacao_destino = models.ForeignKey(
+        MetodoTransacao,
+        related_name='entrada_destinotransacao',
+        related_query_name='entrada_destino_transacao',
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT
+    )
+    transacao_entrada_saida = models.CharField(
+        'Entrada/Saida',
+        max_length=100,
+        choices=TRANSACAO_E_S_CHOICES,
+        default='S'
     )
 
     class Meta:
-        verbose_name = 'Entrada'
-        verbose_name_plural = 'Entradas'
-        ordering = ['entrada_data', 'entrada_ds']
+        verbose_name = 'Transacao'
+        verbose_name_plural = 'Transações'
+        ordering = ['transacao_data', 'transacao_descricao']
 
     def __str__(self):
-        return f'{self.entrada_ds}'
+        return f'{self.transacao_descricao}'
 
     def get_absolute_url(self):
-        return reverse("entrada", kwargs={"pk": self.pk})
+        return reverse("transacao", kwargs={"pk": self.pk})
 
+    def colored_transacao_descricao(self):
 
-class Saida(UserConnected):
-    saida_id = models.BigAutoField(
-        'ID - Saída', primary_key=True
-    )
-    saida_data = models.DateField(
-        'Data', auto_now=False, auto_now_add=False
-    )
-    saida_area = models.ForeignKey(
-        AreaTransacao,
-        related_name='saida_areatransacao',
-        related_query_name='saida_areatransacao',
-        on_delete=models.PROTECT
-    )
-    saida_ds = models.CharField(
-        'Descrição', max_length=100
-    )
-    saida_tipo = models.ForeignKey(
-        TipoTransacao,
-        related_name='saida_tipotransacao',
-        related_query_name='saida_tipotransacao',
-        on_delete=models.PROTECT
-    )
-    saida_valor = models.DecimalField(
-        'Valor', max_digits=7, decimal_places=2
-    )
-    saida_metodo_transacao = models.ForeignKey(
-        MetodoTransacao,
-        related_name='saida_metodotransacao',
-        related_query_name='saida_metodotransacao',
-        on_delete=models.PROTECT
-    )
-
-    class Meta:
-        verbose_name = 'Saída'
-        verbose_name_plural = 'Saídas'
-        ordering = ['saida_data', 'saida_ds']
-
-    def __str__(self):
-        return f'{self.saida_ds}'
-
-    def get_absolute_url(self):
-        return reverse("saida", kwargs={"pk": self.pk})
-
-    def colored_saida_ds(self):
-
-        if self.saida_tipo.__str__() == 'Extra':
+        if self.transacao_tipo.__str__() == 'Extra':
             return format_html(
-                f'<span style="color: #ff0000;">{self.saida_ds}</span>'
+                f'<span style="color: #ff0000;">{self.transacao_descricao}</span>'
             )
         else:
-            return self.saida_tipo
+            return self.transacao_tipo
 
-    colored_saida_ds.short_description = 'Descrição'
-    colored_saida_ds.allow_tags = True
-    colored_saida_ds.admin_order_field = 'saida_ds'
+    colored_transacao_descricao.short_description = 'Descrição'
+    colored_transacao_descricao.allow_tags = True
+    colored_transacao_descricao.admin_order_field = 'transacao_descricao'
 
-    def colored_saida_tipo(self):
+    def colored_transacao_tipo(self):
 
-        if self.saida_tipo.__str__() == 'Extra':
+        if self.transacao_tipo.__str__() == 'Extra':
             return format_html(
-                f'<span style="color: #ff0000;">{self.saida_tipo}</span>'
+                f'<span style="color: #ff0000;">{self.transacao_tipo}</span>'
             )
         else:
-            return self.saida_tipo
+            return self.transacao_tipo
 
-    colored_saida_tipo.short_description = "Saída Tipo"
-    colored_saida_tipo.allow_tags = True
-    colored_saida_tipo.admin_order_field = 'saida_tipo'
+    colored_transacao_tipo.short_description = "Tipo de Transação"
+    colored_transacao_tipo.allow_tags = True
+    colored_transacao_tipo.admin_order_field = 'transacao_tipo'
