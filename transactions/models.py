@@ -110,7 +110,7 @@ class Transacao(UserConnected):
         on_delete=models.PROTECT
     )
     transacao_tipo = models.ForeignKey(
-        MetodoTransacao,
+        TipoTransacao,
         related_name='transacao_tipotransacao',
         related_query_name='transacao_tipo_transacao',
         on_delete=models.PROTECT
@@ -127,7 +127,7 @@ class Transacao(UserConnected):
         'Entrada/Saida',
         max_length=100,
         choices=TRANSACAO_E_S_CHOICES,
-        default='S'
+        default='Saída'
     )
 
     class Meta:
@@ -145,10 +145,10 @@ class Transacao(UserConnected):
 
         if self.transacao_tipo.__str__() == 'Extra':
             return format_html(
-                f'<span style="color: #ff0000;">{self.transacao_descricao}</span>'
+                f'<span style="color: #FF6B6B; margin: 0; padding: 0; font-size: 1rem;">{self.transacao_descricao}</span>'
             )
         else:
-            return self.transacao_tipo
+            return self.transacao_descricao
 
     colored_transacao_descricao.short_description = 'Descrição'
     colored_transacao_descricao.allow_tags = True
@@ -158,7 +158,7 @@ class Transacao(UserConnected):
 
         if self.transacao_tipo.__str__() == 'Extra':
             return format_html(
-                f'<span style="color: #ff0000;">{self.transacao_tipo}</span>'
+                f'<span style="color: #FF6B6B; margin: 0; padding: 0; font-size: 1rem;">{self.transacao_tipo}</span>'
             )
         else:
             return self.transacao_tipo
