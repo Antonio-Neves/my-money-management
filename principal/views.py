@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 
-from transactions.models import Saida
+from transactions.models import Transacao
 
 
 months_list = [
@@ -21,7 +21,13 @@ months_list = [
 class IndexView(ListView):
     template_name = 'principal/index.html'
     extra_context = {'months_list': months_list}
-    queryset = Saida.objects.select_related('user_connected', 'saida_area', 'saida_metodo_transacao', 'saida_tipo')
+    queryset = Transacao.objects.select_related(
+        'user_connected',
+        'transacao_area',
+        'transacao_metodo',
+        'transacao_tipo',
+        'transacao_destino'
+    )
 
     def get_queryset(self):
 
