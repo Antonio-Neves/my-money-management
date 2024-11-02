@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="container">
-        <h2 class="">Saídas</h2>
+        <h2 class="">Transações</h2>
         <div class="row row-cols-auto py-0">
             {% for month in months_list %}
                 <div class="col">
@@ -47,14 +47,27 @@
         </div>
         <div class="" id="">
             {% if user.is_authenticated %}
-                {% for saida in object_list %}
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item list-column-6 border border-primary text-center fw-bold">Data</li>
+                    <li class="list-group-item list-column-30 border border-primary text-center fw-bold">Descrição</li>
+                    <li class="list-group-item list-column-6 border border-primary text-center fw-bold">Valor</li>
+                    <li class="list-group-item list-column-7 border border-primary text-center fw-bold">Área</li>
+                    <li class="list-group-item list-column-7 border border-primary text-center fw-bold">Método</li>
+                    <li class="list-group-item list-column-7 border border-primary text-center fw-bold">Tipo</li>
+                    <li class="list-group-item list-column-7 border border-primary text-center fw-bold">Destino</li>
+                    <li class="list-group-item list-column-5 border border-primary text-center fw-bold">E / S</li>
+                </ul>
+                {% for transacao in object_list %}
                     <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item list-column-10 border border-primary text-start">{{ saida.saida_data|date:"d/m/Y" }}</li>
-                        <li class="list-group-item list-column-45 border border-primary text-start">{{ saida.saida_ds }}</li>
-                        <li class="list-group-item list-column-10 border border-primary text-end">{{ saida.saida_valor }} €</li>
-                        <li class="list-group-item list-column-10 border border-primary">{{ saida.saida_area }}</li>
-                        <li class="list-group-item list-column-15 border border-primary">{{ saida.saida_metodo_transacao }}</li>
-                        <li class="list-group-item list-column-10 border border-primary">{{ saida.saida_tipo }}</li>
+                        <li class="list-group-item list-column-6 border border-primary text-start">{{ transacao.transacao_data|date:"d/m/Y" }}</li>
+                        <li class="list-group-item list-column-30 border border-primary text-start">{{ transacao.colored_transacao_descricao }}</li>
+                        <li class="list-group-item list-column-6 border border-primary text-end">{{ transacao.transacao_valor }} €</li>
+                        <li class="list-group-item list-column-7 border border-primary">{{ transacao.transacao_area }}</li>
+                        <li class="list-group-item list-column-7 border border-primary">{{ transacao.transacao_metodo }}</li>
+                        <li class="list-group-item list-column-7 border border-primary">{{ transacao.colored_transacao_tipo }}</li>
+                        <li class="list-group-item list-column-7 border border-primary">
+                            {% if transacao.transacao_destino %}{{ transacao.transacao_destino }}{% else %} {% endif %}</li>
+                        <li class="list-group-item list-column-5 border border-primary">{{ transacao.get_transacao_entrada_saida_display }}</li>
                     </ul>
                 {% endfor %}
             {% endif %}
