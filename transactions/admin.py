@@ -31,13 +31,15 @@ class TransacaoAdmin(FilterUserAdmin):
     list_display = [
         'transacao_data',
         'transacao_area',
-        'transacao_descricao',
+        'colored_transacao_descricao',
         'transacao_valor',
         'transacao_metodo',
-        'transacao_tipo',
+        'colored_transacao_tipo',
         'transacao_destino',
         'transacao_entrada_saida'
     ]
+
+    search_fields = ["transacao_descricao"]
 
     list_filter = ['transacao_data', 'transacao_entrada_saida', 'transacao_tipo']
 
