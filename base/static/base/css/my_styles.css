@@ -160,6 +160,16 @@ p {
     width: 5%
 }
 
+.list-column-6 {
+    /*padding: 0.5%;*/
+    width: 6%
+}
+
+.list-column-7 {
+    /*padding: 0.5%;*/
+    width: 7%
+}
+
 .list-column-10 {
     padding: 0.5%;
     width: 10%
@@ -168,6 +178,11 @@ p {
 .list-column-15 {
     /*padding: 0.5%;*/
     width: 15%
+}
+
+.list-column-30 {
+    /*padding: 0.5%;*/
+    width: 30%
 }
 
 .list-column-45 {
