@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" version="24.7.6">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1362" dy="729" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2343" dy="1357" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="metodo_transacao" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontFamily=Lucida Console;strokeColor=#0066CC;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="600" y="200" width="200" height="160" as="geometry">
+          <mxGeometry x="600" y="200" width="200" height="140" as="geometry">
             <mxRectangle x="120" y="120" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -18,11 +18,8 @@
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--2" value="metodo_transacao_nome" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontFamily=Lucida Console;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
           <mxGeometry y="78" width="200" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="1JE7Vxh66b0BAEWKvs18-33" value="metodo_transacao_tipo" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontFamily=Lucida Console;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="104" width="200" height="26" as="geometry" />
-        </mxCell>
         <mxCell id="wCGoDHzEjfC_zj60Jj6W-11" value="metodo_transacao_saldo" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontFamily=Lucida Console;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="130" width="200" height="26" as="geometry" />
+          <mxGeometry y="104" width="200" height="26" as="geometry" />
         </mxCell>
         <mxCell id="1JE7Vxh66b0BAEWKvs18-23" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;rounded=0;fontFamily=Lucida Console;entryX=1.001;entryY=0.654;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#0066CC;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="zkfFHV4jXpPFQw0GAbJ--1" target="wCGoDHzEjfC_zj60Jj6W-7" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
@@ -100,21 +97,21 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="__y2SSFFmTn6f1-wdLO0-0" value="tipo_transacao" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontFamily=Lucida Console;strokeColor=#AB8004;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="__y2SSFFmTn6f1-wdLO0-0" value="tipo_transacao" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fontFamily=Lucida Console;strokeColor=#AB8004;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="600" y="40" width="200" height="110" as="geometry">
             <mxRectangle x="120" y="120" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="__y2SSFFmTn6f1-wdLO0-1" value="tipo_transacao_id" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Lucida Console;" vertex="1" parent="__y2SSFFmTn6f1-wdLO0-0">
+        <mxCell id="__y2SSFFmTn6f1-wdLO0-1" value="tipo_transacao_id" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Lucida Console;" parent="__y2SSFFmTn6f1-wdLO0-0" vertex="1">
           <mxGeometry y="26" width="200" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="__y2SSFFmTn6f1-wdLO0-2" value="tipo_transacao_nome" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontFamily=Lucida Console;" vertex="1" parent="__y2SSFFmTn6f1-wdLO0-0">
+        <mxCell id="__y2SSFFmTn6f1-wdLO0-2" value="tipo_transacao_nome" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontFamily=Lucida Console;" parent="__y2SSFFmTn6f1-wdLO0-0" vertex="1">
           <mxGeometry y="52" width="200" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="__y2SSFFmTn6f1-wdLO0-3" value="user_connected       -abst" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontFamily=Lucida Console;" vertex="1" parent="__y2SSFFmTn6f1-wdLO0-0">
+        <mxCell id="__y2SSFFmTn6f1-wdLO0-3" value="user_connected       -abst" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;fontFamily=Lucida Console;" parent="__y2SSFFmTn6f1-wdLO0-0" vertex="1">
           <mxGeometry y="78" width="200" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="__y2SSFFmTn6f1-wdLO0-4" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;rounded=0;fontFamily=Lucida Console;entryX=0.999;entryY=0.698;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#AB8004;entryPerimeter=0;elbow=horizontal;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="__y2SSFFmTn6f1-wdLO0-1" target="wCGoDHzEjfC_zj60Jj6W-9">
+        <mxCell id="__y2SSFFmTn6f1-wdLO0-4" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;rounded=0;fontFamily=Lucida Console;entryX=0.999;entryY=0.698;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#AB8004;entryPerimeter=0;elbow=horizontal;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="__y2SSFFmTn6f1-wdLO0-1" target="wCGoDHzEjfC_zj60Jj6W-9" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="600" y="210" as="sourcePoint" />
             <mxPoint x="240" y="236" as="targetPoint" />
@@ -122,6 +119,12 @@
               <mxPoint x="570" y="160" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="tdtzqpaoqlJX0WNXYuq7-0" value="&lt;div&gt;EXEMPLOS:&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;Área de Transação - Casa, Mercado, Comida&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Tipo de Transação - Despesa fixa, Extra, Urgente&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Métodos de Transação - BPN, CC BPN, MBway BPN&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="40" y="400" width="320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tdtzqpaoqlJX0WNXYuq7-1" value="&lt;div&gt;NOTAS:&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;No Método de transação ou no Destino da transação&lt;/div&gt;&lt;div&gt;(quando a transação for uma &quot;entrada&quot; ) é utilizada a tabela &#39;metodo_transacao&#39;&amp;nbsp;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="40" y="560" width="320" height="130" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
