@@ -21,6 +21,7 @@ db.sqlite3
 media
 htmlcov/*
 */migrations
+Example
 
 # Files
 # drawio backup file
