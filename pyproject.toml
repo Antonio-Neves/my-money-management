@@ -1,0 +1,3 @@
+[tool.taskipy.tasks]
+run = 'python manage.py runserver'
+
