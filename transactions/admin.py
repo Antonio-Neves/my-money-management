@@ -28,6 +28,14 @@ class FilterUserAdmin(admin.ModelAdmin):
 @admin.register(Transacao)
 class TransacaoAdmin(FilterUserAdmin):
 
+    def get_changeform_initial_data(self, request):
+        """
+        Define valores iniciais para o formulário no admin.
+        """
+        initial = super().get_changeform_initial_data(request)
+        initial['transacao_entrada_saida'] = 'S'  # Defina o valor inicial aqui
+        return initial
+
     list_display = [
         'transacao_data',
         'transacao_area',
