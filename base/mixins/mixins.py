@@ -10,7 +10,7 @@ class FilterUserConnected():
         # queryset = super().get_queryset()
 
         if self.request.user.is_authenticated:
-            return super().get_queryset().filter(user_conected=self.request.user)
+            return super().get_queryset().filter(user_connected=self.request.user)
 
         else:
             return super().get_queryset().filter(user_connected=None)
