@@ -60,7 +60,7 @@ if DEBUG:
 # ----------------------------------------------------------
 # Environment variables used in another files
 ADMIN_SITE = config('ADMIN_SITE')
-CUSTOM_USER_GROUP = config('CUSTOM_USER_GROUP')
+# CUSTOM_USER_GROUP = config('CUSTOM_USER_GROUP')
 
 
 # ----------------------------------------------------------
