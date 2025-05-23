@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 
+from base.mixins.mixins import FilterUserConnected
 from transactions.models import Transacao
 
 
@@ -18,7 +19,7 @@ months_list = [
 # 	extra_context = {'months_list': months_list}
 
 
-class IndexView(ListView):
+class IndexView(FilterUserConnected, ListView):
     template_name = 'principal/index.html'
     extra_context = {'months_list': months_list}
     queryset = Transacao.objects.select_related(
@@ -28,11 +29,3 @@ class IndexView(ListView):
         'transacao_tipo',
         'transacao_destino'
     )
-
-    def get_queryset(self):
-
-        if self.request.user.is_authenticated:
-            return self.queryset.filter(user_connected=self.request.user)
-
-        else:
-            return super().get_queryset().filter(user_connected=None)
