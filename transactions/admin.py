@@ -30,10 +30,11 @@ class TransacaoAdmin(FilterUserAdmin):
 
     def get_changeform_initial_data(self, request):
         """
-        Define valores iniciais para o formulário no admin.
+        Define correct default field value in form
         """
+
         initial = super().get_changeform_initial_data(request)
-        initial['transacao_entrada_saida'] = 'S'  # Defina o valor inicial aqui
+        initial['transacao_entrada_saida'] = 'S'
         return initial
 
     list_display = [
