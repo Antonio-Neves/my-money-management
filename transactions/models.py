@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils.html import format_html
+from django.db import transaction
+
 
 
 TRANSACAO_E_S_CHOICES = {
@@ -127,7 +129,7 @@ class Transacao(UserConnected):
         'Entrada/Saida',
         max_length=100,
         choices=TRANSACAO_E_S_CHOICES,
-        default='Saída'
+        default='S'
     )
 
     class Meta:
@@ -140,6 +142,118 @@ class Transacao(UserConnected):
 
     def get_absolute_url(self):
         return reverse("transacao", kwargs={"pk": self.pk})
+
+    def save(self, *args, **kwargs):
+        # Verificar se é uma nova transação
+        is_creating = self.pk is None
+        old_valor = None
+        old_metodo = None
+        old_destino = None
+        old_entrada_saida = None
+
+        # Se está editando, buscar os valores antigos
+        if not is_creating:
+            try:
+                old_transaction = Transacao.objects.get(pk=self.pk)
+                old_valor = old_transaction.transacao_valor
+                old_metodo = old_transaction.transacao_metodo
+                old_destino = old_transaction.transacao_destino
+                old_entrada_saida = old_transaction.transacao_entrada_saida
+            except Transacao.DoesNotExist:
+                is_creating = True
+
+        with transaction.atomic():
+            # Salvar a transação
+            super().save(*args, **kwargs)
+
+            if is_creating:
+                # Nova transação - apenas aplicar o valor
+                self._aplicar_valor_saldo(
+                    self.transacao_metodo,
+                    self.transacao_valor,
+                    self.transacao_entrada_saida,
+                    operacao='adicionar'
+                )
+
+                # Se há destino (transferência)
+                if self.transacao_destino:
+                    self._aplicar_valor_saldo(
+                        self.transacao_destino,
+                        self.transacao_valor,
+                        'Entrada',  # Destino sempre recebe
+                        operacao='adicionar'
+                    )
+            else:
+                # Editando transação - reverter valores antigos e aplicar novos
+
+                # Reverter valor antigo
+                self._aplicar_valor_saldo(
+                    old_metodo,
+                    old_valor,
+                    old_entrada_saida,
+                    operacao='reverter'
+                )
+
+                if old_destino:
+                    self._aplicar_valor_saldo(
+                        old_destino,
+                        old_valor,
+                        'Entrada',
+                        operacao='reverter'
+                    )
+
+                # Aplicar novo valor
+                self._aplicar_valor_saldo(
+                    self.transacao_metodo,
+                    self.transacao_valor,
+                    self.transacao_entrada_saida,
+                    operacao='adicionar'
+                )
+
+                if self.transacao_destino:
+                    self._aplicar_valor_saldo(
+                        self.transacao_destino,
+                        self.transacao_valor,
+                        'Entrada',
+                        operacao='adicionar'
+                    )
+
+    def delete(self, *args, **kwargs):
+        with transaction.atomic():
+            # Reverter o valor antes de deletar
+            self._aplicar_valor_saldo(
+                self.transacao_metodo,
+                self.transacao_valor,
+                self.transacao_entrada_saida,
+                operacao='reverter'
+            )
+
+            if self.transacao_destino:
+                self._aplicar_valor_saldo(
+                    self.transacao_destino,
+                    self.transacao_valor,
+                    'Entrada',
+                    operacao='reverter'
+                )
+
+            super().delete(*args, **kwargs)
+
+    def _aplicar_valor_saldo(self, metodo, valor, entrada_saida, operacao):
+        """
+        Aplica ou reverte valor no saldo do método
+        """
+        if operacao == 'adicionar':
+            if entrada_saida == 'Entrada':
+                metodo.metodo_transacao_saldo += valor
+            else:  # Saída
+                metodo.metodo_transacao_saldo -= valor
+        elif operacao == 'reverter':
+            if entrada_saida == 'Entrada':
+                metodo.metodo_transacao_saldo -= valor
+            else:  # Saída
+                metodo.metodo_transacao_saldo += valor
+
+        metodo.save()
 
     def colored_transacao_descricao(self):
 
