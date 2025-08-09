@@ -9,7 +9,7 @@ from transactions.models import (
 )
 
 
-@admin.register(AreaTransacao, TipoTransacao, MetodoTransacao)
+@admin.register(AreaTransacao, TipoTransacao)
 class FilterUserAdmin(admin.ModelAdmin):
 
     exclude = ['user_connected']
@@ -23,6 +23,16 @@ class FilterUserAdmin(admin.ModelAdmin):
 
         obj.user_connected = request.user
         super().save_model(request, obj, form, change)
+
+
+
+@admin.register(MetodoTransacao)
+class MetodoTransacaoAdmin(FilterUserAdmin):
+
+    list_display = [
+        'metodo_transacao_nome',
+        'metodo_transacao_saldo'
+    ]
 
 
 @admin.register(Transacao)
