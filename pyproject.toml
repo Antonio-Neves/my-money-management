@@ -1,4 +1,4 @@
 [tool.taskipy.tasks]
 run = 'python manage.py runserver'
-super = "echo from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('antonio@antonio.com', 'Antonio', 'Neves', 'pusca') | python manage.py shell"
+super = "echo from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('antonio@antonio.com', 'Antonio', 'Neves', '123456') | python manage.py shell"
 
