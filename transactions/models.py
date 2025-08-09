@@ -26,7 +26,7 @@ class AreaTransacao(UserConnected):
         'ID - Área Transação', primary_key=True
     )
     area_transacao_nome = models.CharField(
-        'Área de Transação', max_length=100, unique=True
+        'Área de Transação', max_length=100
     )
 
     class Meta:
@@ -46,7 +46,7 @@ class TipoTransacao(UserConnected):
         'ID - Tipo Transação', primary_key=True
     )
     tipo_transacao_nome = models.CharField(
-        'Tipo de Transação', max_length=100, unique=True
+        'Tipo de Transação', max_length=100
     )
 
     class Meta:
@@ -66,7 +66,7 @@ class MetodoTransacao(UserConnected):
         'ID - Método Transação', primary_key=True
     )
     metodo_transacao_nome = models.CharField(
-        'Método de Transação', max_length=100, unique=True
+        'Método de Transação', max_length=100
     )
     metodo_transacao_saldo = models.DecimalField(
         'Saldo',
